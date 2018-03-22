@@ -1,0 +1,23 @@
+{
+  "name": "shiiit",
+  "version": "1.0.0",
+  "description": "Popping bubbles gives points.\r Bubbles regen at a rate.",
+  "main": "sketch.js",
+  "dependencies": {
+    "gh-pages": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "deploy": "gh-pages -d ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElDuderino420/Shiiit.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ElDuderino420/Shiiit/issues"
+  },
+  "homepage": "http://elduderino420.github.io/Shiiit"
+}
