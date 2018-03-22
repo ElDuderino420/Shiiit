@@ -2,7 +2,6 @@ let bubbles = [];
 let popper;
 let score = 0;
 let rate = 1;
-let timer = 1;
 
 function setup() {
   // put setup code here
@@ -18,7 +17,7 @@ function setup() {
 
   popper = new Popper(400, 200, 10);
   popper.changeColor('orangered');
-  noCursor();
+  //noCursor();
 }
 
 function draw() {
@@ -26,17 +25,10 @@ function draw() {
   background('teal');
 
 
-  if(mouseX <= width && mouseX >= 0 && mouseY <= height && mouseY >= 0){
-    popper.x = mouseX;
-    popper.y = mouseY;
-  } else if(timer < 0) {
-    popper.move();
-    timer = 1;
-  } else {
-    timer--;
-  }
+  
   
   popper.show();
+  popper.move();
   
 
   for ([i, b] of bubbles.entries()) {
@@ -44,6 +36,7 @@ function draw() {
     b.move();
     //for(other of bubbles) {
     if (b.intersects(popper)) {
+      popper.bounce();
       //b.changeColor(100);
       bubbles.splice(i, 1);
       score++;
@@ -66,6 +59,7 @@ function draw() {
 
 
 function mousePressed() {
+  console.log(fadsgdhs);
   for ([i, b] of bubbles.entries()) {
     if (b.contains(mouseX, mouseY)) {
       b.clicked();
@@ -85,5 +79,6 @@ function spawn(list) {
   setTimeout(() => {
     generateRandom(list);
     spawn(list);
-  }, 100*Math.exp(-rate/list.length));
+    console.log(1000+(rate/list.length))
+  }, 1000+(rate/list.length));
 }
