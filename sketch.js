@@ -59,6 +59,7 @@ function draw() {
 
 
 function mousePressed() {
+  console.log(fadsgdhs);
   for ([i, b] of bubbles.entries()) {
     if (b.contains(mouseX, mouseY)) {
       b.clicked();
@@ -78,5 +79,6 @@ function spawn(list) {
   setTimeout(() => {
     generateRandom(list);
     spawn(list);
-  }, 100*Math.exp(-rate/list.length));
+    console.log(1000+(rate/list.length))
+  }, 1000+(rate/list.length));
 }
