@@ -79,6 +79,6 @@ function spawn(list) {
   setTimeout(() => {
     generateRandom(list);
     spawn(list);
-    console.log(1000+(rate/list.length))
+    //console.log(1000+(rate/list.length))
   }, 1000+(rate/list.length));
 }

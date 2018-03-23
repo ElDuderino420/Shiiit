@@ -1,14 +1,13 @@
 class Bubble {
     constructor(x, y, r = 50) {
-        this.x = x;
-        this.y = y;
+        this.location = createVector(x, y);
         this.r = r;
         this.brightness = 0;
         this.color = 255;
     }
 
     intersects(other) {
-        let d = dist(this.x, this.y, other.x, other.y);
+        let d = dist(this.location.x, this.location.y, other.location.x, other.location.y);
         return (d < this.r + other.r);
     }
 
@@ -20,8 +19,8 @@ class Bubble {
         this.brightness = bright;
     }
 
-    contains(px, py) {
-        let d = dist(px, py, this.x, this.y);
+    contains(p) {
+        let d = dist(p, this.location);
         return d < this.r;
     }
 
@@ -30,8 +29,8 @@ class Bubble {
     }
 
     move() {
-        this.x = this.x + random(-2, 2);
-        this.y = this.y + random(-2, 2);
+        this.location.x += random(-2, 2);
+        this.location.y += random(-2, 2);
     }
 
     show() {
@@ -39,7 +38,7 @@ class Bubble {
         stroke(this.color);
         strokeWeight(4);
         fill(this.brightness, 125);
-        ellipse(this.x, this.y, this.r * 2);
+        ellipse(this.location.x, this.location.y, this.r * 2);
         pop();
     }
 }
