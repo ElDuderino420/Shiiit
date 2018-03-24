@@ -1,11 +1,14 @@
 let bubbles = [];
-let popper;
-let score = 0;
-let rate = 1;
+let popper = [];
+var score = 0;
+var rate = 0.1;
+
+let gui;
 
 function setup() {
   // put setup code here
   createCanvas(800, 600);
+
   // generateRandom(bubbles);
   // setInterval(() => {
   //   if (bubbles.length < 1000000) {
@@ -15,9 +18,12 @@ function setup() {
   spawn(bubbles);
 
 
-  popper = new Popper(400, 200, 10);
-  popper.changeColor('orangered');
+  popper.push(new Popper(400, 200, 10));
+
+
   //noCursor();
+
+
 }
 
 function draw() {
@@ -25,24 +31,36 @@ function draw() {
   background('teal');
 
 
-  
-  
-  popper.show();
-  popper.move();
-  
+
+  for (p of popper) {
+    p.show();
+    p.move();
+
+    for ([i, b] of bubbles.entries()) {
+      if (b.intersects(p)) {
+        p.bounce(b);
+        b.hit();
+        if (b.health <= 0) {
+          bubbles.splice(i, 1);
+          score++;
+        }
+      }
+    }
+  }
+
 
   for ([i, b] of bubbles.entries()) {
     b.show();
     b.move();
     //for(other of bubbles) {
-    if (b.intersects(popper)) {
-      popper.bounce();
+    /* if (b.intersects(popper)) {
+      popper.bounce(b);
       //b.changeColor(100);
       bubbles.splice(i, 1);
       score++;
     } else {
       b.changeBrightness(0);
-    }
+    } */
     //}
 
   }
@@ -59,7 +77,6 @@ function draw() {
 
 
 function mousePressed() {
-  console.log(fadsgdhs);
   for ([i, b] of bubbles.entries()) {
     if (b.contains(mouseX, mouseY)) {
       b.clicked();
@@ -72,7 +89,8 @@ function generateRandom(list) {
   let x = random(width);
   let y = random(height);
   let r = random(10, 50);
-  list.push(new Bubble(x, y, r));
+  let h = floor(random(1, 10));
+  list.push(new Bubble(x, y, r, h));
 }
 
 function spawn(list) {
@@ -80,5 +98,6 @@ function spawn(list) {
     generateRandom(list);
     spawn(list);
     //console.log(1000+(rate/list.length))
-  }, 1000+(rate/list.length));
+    //console.log("new! time till next : " + (500+Math.exp(list.length*rate)))
+  }, 500 + Math.exp(list.length * rate));
 }

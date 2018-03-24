@@ -1,9 +1,12 @@
 class Bubble {
-    constructor(x, y, r = 50) {
+    constructor(x, y, r = 50, h = 1) {
         this.location = createVector(x, y);
         this.r = r;
         this.brightness = 0;
-        this.color = 255;
+        this.background = 125;
+        this.color = color(255, 255, 255);
+        this.health = h;
+        this.maxHP = h;
     }
 
     intersects(other) {
@@ -24,8 +27,9 @@ class Bubble {
         return d < this.r;
     }
 
-    clicked() {
-
+    hit() {
+        this.health--;
+        this.background = lerp(this.background, 255, (1/this.maxHP));
     }
 
     move() {
@@ -37,8 +41,12 @@ class Bubble {
         push();
         stroke(this.color);
         strokeWeight(4);
-        fill(this.brightness, 125);
+        fill(this.brightness, this.background);
         ellipse(this.location.x, this.location.y, this.r * 2);
+        noStroke();
+        //fill(this.color);
+        //textAlign(CENTER, CENTER);
+        //text(this.health, this.location.x, this.location.y);
         pop();
     }
 }
