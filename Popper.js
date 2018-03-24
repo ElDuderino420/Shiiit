@@ -9,6 +9,7 @@ class Popper {
         this.target = createVector(random(0, width), random(0, height));
         this.bouncing = false;
         this.history = [];
+        this.b;
     }
 
     intersects(other) {
@@ -31,14 +32,18 @@ class Popper {
 
     bounce(bubble) {
         this.bouncing = true;
-        this.t = this.target;
+        const t = this.target;
+        console.log("hit: " + t);
+        console.log("at: " + this.location);
         let l = this.location; 
-        p5.Vector.add(l, p5.Vector.sub(l, bubble.location).mult(2), this.target);
-
-        setTimeout(() => {
-            this.target = this.t;
+        this.b = (p5.Vector.add(l, p5.Vector.mult(p5.Vector.sub(l, bubble.location), 2)));
+        console.log(bubble)
+        console.log(this.b);
+        /* setTimeout(() => {
+            console.log("old: " + t);
+            //this.target = t;
             this.bouncing = false;
-        }, 200);
+        }, 500); */
     }
 
     move() {
@@ -49,21 +54,30 @@ class Popper {
         }
 
         this.d = dist(this.location.x, this.location.y, this.target.x, this.target.y);
+        if(this.bouncing) {
+            let dis = dist(this.location.x, this.location.y, this.b.x, this.b.y);
+            if(dis < this.r * 4) {
+                this.bouncing =  false;
+            }
+        }
 
-        if (mouseX <= width && mouseX >= 0 && mouseY <= height && mouseY >= 0) {
+        if (mouseX <= width && mouseX > 0 && mouseY <= height && mouseY > 8) {
+            //mouseX <= width && mouseX > 0 && mouseY <= height && mouseY > 8
+            //console.log(mouseX + ":" + mouseY);
             let speed = this.speed * 10;
-            this.location = this.bouncing? p5.Vector.lerp(this.location, this.target, speed/2) : p5.Vector.lerp(this.location, createVector(mouseX, mouseY), speed);
+            this.location = this.bouncing? p5.Vector.lerp(this.location, this.b, speed/2) : p5.Vector.lerp(this.location, createVector(mouseX, mouseY), speed);
             //this.location.x = lerp(this.location.x, mouseX, speed);
             //this.location.y = lerp(this.location.y, mouseY, speed);
             
 
         } else {
+            
             if (this.d < this.r * 2) {
+                console.log('reached target')
                 this.target = createVector(random(0, width), random(0, height));
-
             }
             let speed = this.speed * 4
-            this.location = this.bouncing? p5.Vector.lerp(this.location, this.target, speed/2) : p5.Vector.lerp(this.location, this.target, speed)
+            this.location = this.bouncing? p5.Vector.lerp(this.location, this.b, speed/2) : p5.Vector.lerp(this.location, this.target, speed)
             
             
         }
@@ -87,9 +101,9 @@ class Popper {
 
 
         ellipse(this.location.x, this.location.y, this.r * 2);
-
-
-
+        stroke('white')
+        ellipse(this.target.x, this.target.y, 1);
+        
         pop();
     }
 }
