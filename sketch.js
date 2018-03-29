@@ -1,14 +1,19 @@
-let bubbles = [];
-let popper = [];
+var bubbles = [];
+var popper = [];
 var score = 0;
-var rate = 0.1;
+var rate = 1000;
 
-let gui;
+var gui;
+let c;
 
 function setup() {
   // put setup code here
-  createCanvas(800, 600);
+  c = createCanvas(800, 600);
+  c.parent('game');
 
+  gui = createGui('Shiiit');
+  gui.addGlobals('score', 'rate');
+  
   // generateRandom(bubbles);
   // setInterval(() => {
   //   if (bubbles.length < 1000000) {
@@ -18,8 +23,16 @@ function setup() {
   spawn(bubbles);
 
 
+  popper.push(new Popper(400, 200, 20));
   popper.push(new Popper(400, 200, 10));
+  popper.push(new Popper(400, 200, 10));
+  //popper.push(new Popper(400, 200, 10));
+  //popper.push(new Popper(400, 200, 10));
+  //popper.push(new Popper(400, 200, 10));
 
+  gui.addObject(popper[0], 'r', 'speed');
+  gui.addObject(popper[1], 'r', 'speed');
+  gui.addObject(popper[2], 'r', 'speed');
 
   //noCursor();
 
@@ -40,9 +53,10 @@ function draw() {
       if (b.intersects(p)) {
         p.bounce(b);
         b.hit();
+        
         if (b.health <= 0) {
           bubbles.splice(i, 1);
-          score++;
+          score+=b.maxHP;
         }
       }
     }
@@ -72,6 +86,7 @@ function draw() {
   strokeWeight(3);
   stroke('white')
   text('Score: ' + score, width - 10, 10);
+  text('Bubbles: ' + bubbles.length, width - 10, 60);
   pop();
 }
 
@@ -99,5 +114,6 @@ function spawn(list) {
     spawn(list);
     //console.log(1000+(rate/list.length))
     //console.log("new! time till next : " + (500+Math.exp(list.length*rate)))
-  }, 500 + Math.exp(list.length * rate));
+    //500 + Math.exp(list.length * rate)
+  }, rate);
 }

@@ -44,9 +44,9 @@ class Bubble {
         fill(this.brightness, this.background);
         ellipse(this.location.x, this.location.y, this.r * 2);
         noStroke();
-        //fill(this.color);
-        //textAlign(CENTER, CENTER);
-        //text(this.health, this.location.x, this.location.y);
+        fill(this.color);
+        textAlign(CENTER, CENTER);
+        text(this.health, this.location.x, this.location.y);
         pop();
     }
 }

@@ -1,23 +1,72 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
-  <style>
-    body {
-      padding: 0;
-      margin: 0;
-    }
-  </style>
+
+
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ"
+    crossorigin="anonymous"></script>
+
+  
+
   <script src="./resources/p5.min.js"></script>
   <script src="./resources/p5.dom.min.js"></script>
   <script src="./resources/p5.sound.min.js"></script>
+  <script src="./resources/quicksettings.js"></script>
+  <script src="./resources/p5.gui.js"></script>
   <!-- <script src="other.js"></script> -->
   <script src="sketch.js"></script>
   <script src="Bubble.js"></script>
   <script src="Popper.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
+  <div id='game'></div>
+  <div id='gui'>
+    <h2>Shiiit</h2>
+    <div id='upgrades'>
+      <h2>Upgrades</h2>
+      <div id='general'>
+        <h3>General:</h3>
+        <i class="fas fa-stopwatch"></i> Spawn Rate
+        <i class="fas fa-heart"></i> Health
+      </div>
+      <div id='poppers'>
+        <h3>Poppers:</h3>
+        <div id='pop'>
+          <div id='upgradeb'>
+            <br>
+            <i class="fas fa-crosshairs"></i>
+            <br> Damage</div>
+          <div id='upgradeb'>
+            <br>
+            <i class="fas fa-bolt"></i>
+            <br> Speed</div>
+          <div id='upgradeb'>
+            <br>
+            <i class="fas fa-expand-arrows-alt"></i>
+            <br> Size</div>
+
+
+
+        </div>
+        <div id='newpopper'>
+          <i class="fas fa-plus"></i> New Popper
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+  </div>
+
 </body>
 
 </html>

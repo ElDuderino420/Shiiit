@@ -1,0 +1,53 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    
+}
+
+#game{
+    float: left;
+}
+
+#gui{
+    display: inline-block;
+    width: 250px;
+    height: 594px;
+    text-align: center;
+    color: purple;
+    border: purple;
+    border-style: solid;
+    background-color: white;
+}
+
+#upgrades{
+    text-align: left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#newpopper{
+    position: relative;
+    margin-top: 30px;
+    text-align: center;
+    border: teal;
+    border-style: solid;
+    height: 30px;;
+    vertical-align: middle;
+}
+
+#upgradeb{
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    color: white;
+    line-height: 15px;
+    text-align: center;
+    background-color: teal;
+    border: purple;
+    border-style: solid;
+}

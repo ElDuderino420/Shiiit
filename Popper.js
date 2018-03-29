@@ -4,7 +4,7 @@ class Popper {
         this.r = r;
         this.brightness = 0;
         this.color = 'orangered';
-        this.speed = 0.01;
+        this.speed = 100;
         this.d = 0;
         this.target = createVector(random(0, width), random(0, height));
         this.bouncing = false;
@@ -64,7 +64,7 @@ class Popper {
         if (mouseX <= width && mouseX > 0 && mouseY <= height && mouseY > 8) {
             //mouseX <= width && mouseX > 0 && mouseY <= height && mouseY > 8
             //console.log(mouseX + ":" + mouseY);
-            let speed = this.speed * 10;
+            let speed = this.speed / 1000;
             this.location = this.bouncing? p5.Vector.lerp(this.location, this.b, speed/2) : p5.Vector.lerp(this.location, createVector(mouseX, mouseY), speed);
             //this.location.x = lerp(this.location.x, mouseX, speed);
             //this.location.y = lerp(this.location.y, mouseY, speed);
@@ -76,7 +76,7 @@ class Popper {
                 console.log('reached target')
                 this.target = createVector(random(0, width), random(0, height));
             }
-            let speed = this.speed * 4
+            let speed = this.speed / 400
             this.location = this.bouncing? p5.Vector.lerp(this.location, this.b, speed/2) : p5.Vector.lerp(this.location, this.target, speed)
             
             
@@ -102,7 +102,7 @@ class Popper {
 
         ellipse(this.location.x, this.location.y, this.r * 2);
         stroke('white')
-        ellipse(this.target.x, this.target.y, 1);
+        //ellipse(this.target.x, this.target.y, 1);
         
         pop();
     }
